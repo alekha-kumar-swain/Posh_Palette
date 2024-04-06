@@ -1,61 +1,91 @@
 <?php include 'header.php'; ?>
+<?php include './config/db.php'; ?>
 
 <div class="container">
     <h1>Our Products</h1>
-    <!-- Display product listings here -->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img src="images/product1.jpg" class="card-img-top" alt="Product 1">
-                <div class="card-body">
-                    <h5 class="card-title">Product 1</h5>
-                    <p class="card-text">Description of Product 1</p>
-                    <a href="#" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
+    <!-- Search box -->
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-        <!-- Add more product cards as needed -->
     </div>
-</div>
+    <!-- Filter options -->
+    <div class="form-group">
+        <label for="sortSelect">Sort by Price:</label>
+        <select class="form-control" id="sortSelect">
+            <option selected>SELECT</option>
+            <option value="lowToHigh">Low to High</option>
+            <option value="highToLow">High to Low</option>
+        </select>
+    </div>
+    <!-- Display product listings here -->
+    <div class="row" id="productList">
+        <?php
+        // Fetch products from the database
+        $sql = "SELECT * FROM products";
+        
+        // Check if sorting option is selected
+        if(isset($_GET['sort'])) {
+            $sortOption = $_GET['sort'];
+            if($sortOption == 'lowToHigh') {
+                $sql .= " ORDER BY Price ASC";
+            } elseif($sortOption == 'highToLow') {
+                $sql .= " ORDER BY Price DESC";
+            }
+        }
 
-<?php include 'footer.php'; ?>
+        $result = mysqli_query($conn, $sql);
 
-<?php
-// Include database connection
-include './config/db.php';
-
-// Fetch products from database
-$sql = "SELECT * FROM products";
-$result = mysqli_query($conn, $sql);
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Posh Palette</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>Products</h2>
-        <div class="row">
-            <?php while($row = mysqli_fetch_assoc($result)): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="Product Image">
+        // Check if there are any products
+        if (mysqli_num_rows($result) > 0) {
+            // Output data of each row
+            while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+                <div class="col-md-4 productItem">
+                    <div class="card productcard">
+                        <img src="<?php echo $row['ProductLink']; ?>" class="card-img-top" alt="<?php echo $row['ProductName']; ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                            <p class="card-text"><?php echo $row['details']; ?></p>
-                            <a href="product_details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                            <h5 class="card-title"><?php echo $row['ProductName']; ?></h5>
+                            <p class="card-text"><?php echo $row['Description']; ?></p>
+                            <p class="card-text"><strong>Price: ₹<?php echo $row['Price']; ?></strong></p>
+                            <a href="product_details.php?id=<?php echo $row['ProductNumber']; ?>" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
-        </div>
-    </div>
-</body>
-</html>
+        <?php
+            }
+        } else {
+            echo "No products found";
+        }
 
+        // Close database connection
+        mysqli_close($conn);
+        ?>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#searchButton').click(function() {
+            var searchQuery = $('#searchInput').val().toLowerCase();
+            $('.productItem').each(function() {
+                var productName = $(this).find('.card-title').text().toLowerCase();
+                var productDescription = $(this).find('.card-text').text().toLowerCase();
+                if (productName.includes(searchQuery) || productDescription.includes(searchQuery)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        $('#sortSelect').change(function() {
+            var selectedOption = $(this).val();
+            window.location.href = 'products.php?sort=' + selectedOption;
+        });
+    });
+</script>
+
+<?php include 'footer.php'; ?>

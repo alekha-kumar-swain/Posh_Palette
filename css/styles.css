@@ -1,6 +1,32 @@
+body{
+    background-color:#faafba71;
+}
+.navbar {
+    background-color: hsla(351, 100%, 85%, 0.712); /* Light pink color */
+}
+.footer{
+    background-color: hsla(351, 100%, 85%, 0.63); /* Light pink color */
+}
 .custom-container{
     background-color: antiquewhite;
     border-radius: 20px;
     border: 2px solid black;
     margin-top: 10px;
 }
+form{
+    padding: 5px;
+}
+hr{
+    color: pink;
+}
+.productcard{
+    margin: 10px;
+    border-radius: 5%;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+.productcard:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
