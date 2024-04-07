@@ -4,17 +4,17 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Check if the user is logged in
-$loggedIn = isset($_SESSION['user']);
+$loggedIn = isset($_SESSION['admin']);
 
 // Set the welcome message and login/logout link
 if ($loggedIn) {
-    $welcomeMessage = "Welcome, {$_SESSION['user']['username']}";
+    $welcomeMessage = "Welcome, {$_SESSION['admin']['username']}";
     $loginLogoutLink = "logout.php' style='color:red;'";
     $linkText = "Logout";
 } else {
     $welcomeMessage = "Welcome, Guest";
     $loginLogoutLink = "login.php";
-    $linkText = "Signup/Login";
+    $linkText = "Admin Login";
 }
 ?>
 
@@ -28,13 +28,13 @@ if ($loggedIn) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar admin navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.php">
-                <img src="./images/logo.png" alt="Posh Palette Logo" width="180" height="80">
+                <img src="../images/admin-logo.png" alt="Posh Palette Logo" width="180" height="80">
 
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,30 +46,8 @@ if ($loggedIn) {
                         <span class="navbar-text"><b><?php echo $welcomeMessage; ?></b></span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href='<?php echo $loginLogoutLink; ?>'>
-                            <b>
-                                <?php echo $linkText; ?>
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </b>
-                        </a>
+                        <a class="nav-link" href='<?php echo $loginLogoutLink; ?>'><b ><?php echo $linkText; ?></b></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="products.php">
-                            Products
-                            <i class="fa-solid fa-bag-shopping"></i>
-                        </a>                        
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cart.php">
-                            Cart
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">
-                            Profile
-                            <i class="fa-solid fa-user"></i>
-                        </a>
                     </li>
                 </ul>
             </div>

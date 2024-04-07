@@ -34,7 +34,7 @@ if(isset($_GET['id'])) {
             <p>Net Quantity: <?php echo $product['NetQuantity']; ?></p>
             <p>Used For: <?php echo $product['UsedFor']; ?></p>
             <p>Country of Origin: <?php echo $product['Country_of_Origin']; ?></p>
-            <p>Price: $<?php echo $product['Price']; ?></p>
+            <p>Price: ₹<?php echo $product['Price']; ?></p>
             <form method="post" action="cart.php?action=add&id=<?php echo $product['ProductNumber']; ?>">
                 <input type="hidden" name="id" value="<?php echo $product['ProductNumber']; ?>">
                 <input type="hidden" name="name" value="<?php echo $product['ProductName']; ?>">

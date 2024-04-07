@@ -2,10 +2,20 @@ body{
     background-color:#faafba71;
 }
 .navbar {
-    background-color: hsla(351, 100%, 85%, 0.712); /* Light pink color */
+    background-color: #ffb3beb6; /* Light pink color */
 }
+.nav-link{
+    font-size: 1.2em;
+    margin: 0 10px 0 0px ;
+}
+
 .footer{
-    background-color: hsla(351, 100%, 85%, 0.63); /* Light pink color */
+    background-color: hwb(351 70% 0% / 0.63); /* Light pink color */
+}
+
+.admin{
+    background-color: #915fcf;    
+    
 }
 .custom-container{
     background-color: antiquewhite;
@@ -29,4 +39,19 @@ hr{
     transform: scale(1.05);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
+.custom-image{
+    height: 100%;
+}
 
+
+.admincard {
+    min-height: 150px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 1.2rem;
+    background-size: cover;
+    background-position: center;
+
+}
+/* Add more nth-child rules for additional cards as needed */

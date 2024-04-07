@@ -108,7 +108,7 @@ if(empty($_SESSION['cart'])) {
                         }
                     }
                     ?>
-                    <p class="card-text">Total Price: $<?php echo number_format($totalPrice, 2); ?></p>
+                    <p class="card-text">Total Price: ₹<?php echo number_format($totalPrice, 2); ?></p>
                     <a href="cart.php?action=clear" class="btn btn-danger">Clear Cart</a>
                 </div>
             </div>

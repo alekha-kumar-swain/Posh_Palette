@@ -98,7 +98,7 @@ include 'header.php';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $item['name'] . '</h5>';
                     echo '<p class="card-text">Quantity: ' . $item['quantity'] . '</p>';
-                    echo '<p class="card-text">Price: $' . number_format($item['price'] * $item['quantity'], 2) . '</p>';
+                    echo '<p class="card-text">Price: ₹' . number_format($item['price'] * $item['quantity'], 2) . '</p>';
                     echo '<a href="cart.php?action=remove&id=' . $key . '" class="btn btn-danger">Remove</a>';
                     echo '</div>';
                     echo '</div>';
@@ -123,7 +123,7 @@ include 'header.php';
                         }
                     }
                     ?>
-                    <p class="card-text">Total Price: $<?php echo number_format($totalPrice, 2); ?></p>
+                    <p class="card-text">Total Price: ₹<?php echo number_format($totalPrice, 2); ?></p>
                     <a href="checkout.php" class="btn btn-primary">Checkout</a>
                     <a href="cart.php?action=clear" class="btn btn-danger">Clear Cart</a>
                 </div>
